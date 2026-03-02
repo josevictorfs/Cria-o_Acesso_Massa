@@ -1,0 +1,10 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(160deg, #f7f9ff 0%, #eef4ff 100%);
+  color: #1f2937;
+}

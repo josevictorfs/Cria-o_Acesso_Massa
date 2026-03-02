@@ -1,0 +1,57 @@
+<main class="container">
+  <header>
+    <h1>Gerador de Acesso (Web)</h1>
+    <p>Importe PDF ou digite nomes manualmente para gerar CSV e DOCX.</p>
+  </header>
+
+  <section class="card">
+    <label>Unidade</label>
+    <select [(ngModel)]="unidade">
+      <option *ngFor="let u of unidadesDisponiveis" [value]="u">{{ u }}</option>
+    </select>
+
+    <label>Domínio de e-mail</label>
+    <input [(ngModel)]="dominio" placeholder="seudominio.com.br" />
+
+    <label>Importar PDF</label>
+    <input type="file" accept="application/pdf" (change)="onPdfSelecionado($event)" />
+
+    <div class="separator">ou</div>
+
+    <label>Digite um nome por linha</label>
+    <textarea [(ngModel)]="textoNomes" rows="8"></textarea>
+    <button (click)="processarTexto()">Processar nomes digitados</button>
+
+    <label>Imagem opcional para DOCX</label>
+    <input type="file" accept="image/*" (change)="onImagemSelecionada($event)" />
+
+    <div class="actions">
+      <button (click)="baixarCsv()">Baixar CSV</button>
+      <button (click)="baixarDocx()">Baixar DOCX</button>
+    </div>
+
+    <p class="status" *ngIf="status">{{ status }}</p>
+  </section>
+
+  <section class="card" *ngIf="alunos.length">
+    <h2>Pré-visualização ({{ alunos.length }})</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>RM</th>
+          <th>Usuário</th>
+          <th>E-mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunos">
+          <td>{{ aluno.nome }}</td>
+          <td>{{ aluno.rm || '-' }}</td>
+          <td>{{ aluno.usuario }}</td>
+          <td>{{ aluno.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
